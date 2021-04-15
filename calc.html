@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.button0 {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 1px 25px;
+  cursor: pointer;
+  width: 15%;
+}
+
+.button01 {border-radius: 8px;}
+
+.button1 {
+  background-color: #0040ff; /* blue */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 20px;
+  width:13%;
+  cursor: pointer;
+}
+.button11 {border-radius: 8px;}
+</style>
+</head>
+<body>
+<div style="border:10px solid red;height:510px;width:500px;background-color:black"> 
+
+	<div style="border:2px solid black;height:100px;width:492px">
+		<input id="inp"  type = "text" size="400" style = "height:95px;width:490px;font-size: 30px" />
+	</div>
+	
+	<button  onclick="myFunction()" class="button1 button11">C</button>
+	<button onclick  = "digits('%')" class="button1 button11">%</button>
+	<button onclick = "backspace();" class="button1 button11"><-</button>	
+	<button onclick  = "digits('/')" class="button1 button11">/</button><br>
+	
+	<button onclick = "digits(7)" class="button0 button01">7</button>
+	<button onclick = "digits(8)" class="button0 button01">8</button>
+	<button onclick = "digits(9)" class="button0 button01">9</button>
+	<button onclick  = "digits('*')" class="button1 button11">X</button><br>
+	
+	<button onclick = "digits(4)" class="button0 button01">4</button>
+	<button onclick = "digits(5)" class="button0 button01">5</button>
+	<button onclick = "digits(6)"class="button0 button01">6</button>
+	<button onclick  = "digits('-')" class="button1 button11">-</button><br>
+	
+	<button onclick = "digits(3)" class="button0 button01">3</button>
+	<button onclick = "digits(2)"class="button0 button01">2</button>
+	<button onclick = "digits(1)" class="button0 button01">1</button>
+	<button onclick  = "digits('+')" class="button1 button11">+</button><br>
+	
+	<button onclick = "digits(0)"class="button0 button01">0</button>
+	<button onclick = "digits('.')" class="button1 button11">.</button>
+	<button onclick = "digits('=')" class="button1 button11">=</button>
+
+	
+</div> 
+<!-- Ending 2 div -->
+<script>
+document.onkeydown = function (e) {
+        return false;
+}
+	let count=0,count1='';
+	function digits(a)
+	{
+		if(typeof a=='number')
+		{
+			count = ((count*10)+a);
+			document.getElementById("inp").value = count1+count;
+		}
+		else if(typeof a=='string')
+		{	
+			count1 = document.getElementById("inp").value;
+			l = count1.length;
+			if(count==0&&count1=='')
+			{
+				alert("First Enter the number");
+			}
+			else
+			{
+				if (count1[l-1]=='+'|| count1[l-1]=='-' || count1[l-1]=='*'||count1[l-1]=='%'||count1[l-1]=='/'||count1[l-1]=='.'||count1[l-1]=='a'||count1[l-1]=='z')
+				{	
+					alert("Multiple Operation not Possible");
+				}
+				else
+				{
+					if(a=='=')
+					{
+						let c;
+						if(l>=3)
+						{
+							for(let i=0;i<l;i++)
+							{
+								if(count1[i]=='+')
+								{
+									c = count1.split("+");
+									let q = Number(c[0]);
+									let y = Number(c[1]);
+									let g = String(q+y);
+									count1 = document.getElementById("inp").value = g;
+									count=0;
+									
+								}
+								else if(count1[i]=='-')
+								{
+									c = count1.split('-');
+									let q = Number(c[0]);
+									let y = Number(c[1]);
+									let g = String(q-y);
+									count1 = document.getElementById("inp").value = g;
+									count=0;
+								}
+								else if(count1[i]=='*')
+								{
+									c = count1.split('*');
+									let q = Number(c[0]);
+									let y = Number(c[1]);
+									let g = String(q*y);
+									count1 = document.getElementById("inp").value = g;
+									count=0;
+								}
+								else if(count1[i]=='/')
+								{
+									c = count1.split('/');
+									let q = Number(c[0]);
+									let y = Number(c[1]);
+									let g = String(q/y);
+									count1 = document.getElementById("inp").value = g;
+									count=0;
+								}
+								else if(count1[i]=='%')
+								{
+									c = count1.split('%');
+									let q = Number(c[0]);
+									let y = Number(c[1]);
+									let g = String(q%y);
+									count1 = document.getElementById("inp").value = g;
+									count=0;
+								}
+								
+							}
+						}
+					}
+					else
+					{
+						count1 = document.getElementById("inp").value = count1+a;	
+						count=0;
+					}
+				}
+				}
+		}
+	}
+let backspace = function()
+{  
+    count  = document.getElementById('inp').value;
+    count = document.getElementById('inp').value=count.substring(0,count.length -1);
+	count1 = '';
+	
+}
+function myFunction()
+{
+count = count1 = document.getElementById('inp').value = '';
+}
+</script>
+</body>
+</html>
